@@ -32,6 +32,15 @@ python3 anilist_import.py import
 
 Each phase saves progress — safe to interrupt and resume.
 
+## Legacy scripts
+
+These were earlier approaches and are no longer needed:
+
+| File | Description |
+|------|-------------|
+| `generate_mal_xml.py` | Generates a MAL-format XML via Jikan API lookups (replaced by direct AniList API) |
+| `retry_failed.py` | Retries unmatched titles from the MAL XML approach |
+
 ## Output files
 
 | File | Description |
