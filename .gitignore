@@ -1,0 +1,18 @@
+.env
+
+# generated files
+candidates.json
+decisions.json
+skipped.json
+progress.json
+import_done.json
+manga_list.xml
+manga_list_retry.xml
+mapping.txt
+retry_mapping.txt
+failed_titles.txt
+
+# MangaUpdates export (personal data)
+*.html
+Reading List - MangaUpdates_files/
+export-*.json
