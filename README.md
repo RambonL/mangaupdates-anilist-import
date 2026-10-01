@@ -1,6 +1,18 @@
+---
+title: anilistimport
+tags:
+  - tool
+  - python
+  - anilist
+---
+
 # MangaUpdates → AniList Importer
 
 Imports a MangaUpdates reading list into AniList via the GraphQL API.
+
+> [!info] Three phases, each resumable
+> `search` (network, ~3 min) → `review` (offline, interactive) → `import` (network, writes to AniList).
+> Every phase writes its progress to disk, so interrupting is safe at any point.
 
 ## Setup
 
@@ -16,6 +28,10 @@ Imports a MangaUpdates reading list into AniList via the GraphQL API.
    ANILIST_TOKEN=your_token_here
    ```
 
+> [!danger] `.env` holds a write-scoped token
+> `ANILIST_TOKEN` can modify your AniList list. Keep it out of git, and revoke the client
+> at https://anilist.co/settings/developer once the import is done.
+
 ## Usage
 
 ```bash
@@ -30,11 +46,14 @@ python3 anilist_import.py review
 python3 anilist_import.py import
 ```
 
-Each phase saves progress — safe to interrupt and resume.
+> [!warning] Run `review` before `import`
+> `search` only produces candidates. Anything below the confidence threshold stays out of
+> `decisions.json` until you confirm it — skipping `review` silently drops those titles.
 
 ## Legacy scripts
 
-These were earlier approaches and are no longer needed:
+> [!failure] Superseded — kept for reference only
+> The MAL-XML detour below was replaced by direct AniList API calls. Don't start here.
 
 | File | Description |
 |------|-------------|
